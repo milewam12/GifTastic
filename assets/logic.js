@@ -75,6 +75,12 @@
 
   displaysButtons();
 
+  $(".gifs").on("click", function () {
+      
+      var state = $(this).attr("data-state");
+
+  })
+
 
 
    
