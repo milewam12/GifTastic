@@ -1,14 +1,13 @@
 
 //Array of topcis
 
- var topics = ["The Big Ban Theory" , "How I Met Your Mother", "Modern Family" , "Family Guy" , "New Girl" , "Orange Is The New Black"];
+ var topics = ["LOL" , "How I Met Your Mother", "Modern Family" , "Family Guy" , "New Girl" , "Orange Is The New Black"];
 
     // Function to render content
 
-    function displayTopics() {
+    function displayTopics(name) {
 
-        var comedy = $(this).attr("data-name");
-        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + comedy + "&api_key=dc6zaTOxFJmzC&limit=10";
+        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + name + "&api_key=dc6zaTOxFJmzC&limit=10";
         $.ajax({
             url: queryURL, 
             method:"GET"
@@ -19,12 +18,12 @@
              for (var i = 0; i < results.length; i++) {
                  if (results[i].rating !== "r" )
             {
-                 var comedyDiv = $("<div>");
+                 var comedyDiv = $("<div class='gifs'>");
                  var rating = results[i].rating;
                  var pRating = $("<p>").text("Rating: " + rating);
                  var comedyImg = $("<img>")
                  
-                 comedyImg.attr("src", results[i].images.fixed_height_still.url);
+                 comedyImg.attr("src", results[i].images.fixed_height_small.url);
 
                  comedyDiv.prepend(pRating);
                  comedyDiv.prepend(comedyImg);
@@ -39,6 +38,12 @@
     }
 
     displayTopics();
+
+    $("#buttons-view").on("click", ".gifBtn", function(){
+        var gifName = $(this).attr("data-name");
+        console.log(gifName)
+        displayTopics(gifName);
+    });
     
 
 
@@ -46,7 +51,7 @@
         $("#buttons-view").empty();
 
         for (var i = 0; i < topics.length; i++) {
-            var btn = $("<button>");
+            var btn = $("<button class='gifBtn'>");
             btn.attr("data-name", topics[i]);
             btn.text(topics[i]);
             $("#buttons-view").append(btn)
