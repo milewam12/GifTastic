@@ -1,6 +1,5 @@
 
 //Array of topcis
-aler("test");
 
  var topics = ["LOL" , "How I Met Your Mother", "Modern Family" , "Family Guy" , "New Girl" , "Orange Is The New Black"];
 
