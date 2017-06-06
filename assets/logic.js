@@ -3,7 +3,7 @@
 
  var topics = ["LOL" , "How I Met Your Mother", "Modern Family" , "Family Guy" , "New Girl" , "Orange Is The New Black"];
 
-    // Function to render content
+    // Function to call API, create dynamic content 
 
     function displayTopics(name) {
 
@@ -29,7 +29,7 @@
                  comedyDiv.prepend(comedyImg);
 
                   $("#comedy-view").prepend(comedyDiv);
-
+                  
             }    
              }
             
@@ -38,15 +38,17 @@
     }
 
     displayTopics();
-
+    
+// click event to call the gis and clear the gifs
     $("#buttons-view").on("click", ".gifBtn", function(){
         var gifName = $(this).attr("data-name");
         console.log(gifName)
         displayTopics(gifName);
+        $("#comedy-view").empty();
     });
     
 
-
+//function to display the gif buttons 
     function displaysButtons() {
         $("#buttons-view").empty();
 
@@ -59,15 +61,15 @@
         }
     }
 
+//click event to capture user's input and add it to the array
   $("#add-comedy").on("click", function (event) {
       event.preventDefault();
       var comedy = $("#comedy-input").val().trim();
       if($("#comedy-input").val() !==""){
           topics.push(comedy);
-
           $("#comedy-input").val("");
-
           displaysButtons();
+          
       }
   });  
 
@@ -75,11 +77,21 @@
 
   displaysButtons();
 
-  $(".gifs").on("click", function () {
-      
-      var state = $(this).attr("data-state");
+  // Pause and animate GIFS it doesn't work. I'm not sure why
 
-  })
+    $('.gifs').on("click", function () {
+      var state = $(this).attr("data-state");
+      if (state === "still") {
+          $(this).attr("src" , $(this).attr("data-animate"));
+          $(this).attr("data-state" , "animate");
+      }else{
+           $(this).attr("src" , $(this).attr("data-still"));
+          $(this).attr("data-still" , "still");
+      }
+
+  });
+
+
 
 
 
